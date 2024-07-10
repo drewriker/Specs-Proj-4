@@ -1,0 +1,37 @@
+{% extends "home.html" %}
+
+{% block content %}
+
+<div class="container">
+    <h1>Teams and Projects</h1>
+
+    {% for team in teams %}
+        <div class="card mt-4">
+            <div class="card-header">
+                <h3>{{ team.team_name }}</h3>
+                <form action="{{ url_for('delete_team', team_id=team.id) }}" method="POST">
+                    {{ team_form.csrf_token() }}
+                    <button type="submit" class="btn btn-danger">Delete Team</button>
+                </form>
+            </div>
+            <div class="card-body">
+                <h5>Projects:</h5>
+                <ul class="list-group">
+                    {% for project in team.projects %}
+                        <li class="list-group-item">
+                            <h6>{{ project.project_name }}</h6>
+                            <p>Description: {{ project.description }}</p>
+                            <p>Completed: {% if project.completed %} Yes {% else %} No {% endif %}</p>
+                            <form action="{{ url_for('delete_project', project_id=project.id) }}" method="POST">
+                                {{ project_form.csrf_token() }}
+                                <button type="submit" class="btn btn-danger">Delete Project</button>
+                            </form>
+                        </li>
+                    {% endfor %}
+                </ul>
+            </div>
+        </div>
+    {% endfor %}
+</div>
+
+{% endblock %}
