@@ -48,7 +48,7 @@ class Project(db.Model):
     
 
 def connect_to_db(app):
-    app.config["SQLALCHEMY_DATABASE_URI"] = "postgresql://drewriker@localhost:5433/project-tracking-app"
+    app.config["SQLALCHEMY_DATABASE_URI"] = "postgresql://username@localhost:5433/project-tracking-app"
     app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
     db.app = app
     db.init_app(app)
